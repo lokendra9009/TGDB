@@ -3,6 +3,7 @@ import datetime
 from django import template
 from django.shortcuts import render_to_response
 from django.shortcuts import render
+from django.conf import settings
 
 
 def index(request):
@@ -16,4 +17,5 @@ def today_is(request):
     # html = t.render(c)
     # return HttpResponse(html)
     # return render_to_response('blog/datetime.html', {'now': now})
-    return render(request, 'blog/datetime.html', {'now':now, 'template_name': 'blog/nav.html'})
+    return render(request, 'blog/datetime.html',
+                  {'now': now, 'template_name': 'blog/nav.html', 'base_dir': settings.BASE_DIR})
