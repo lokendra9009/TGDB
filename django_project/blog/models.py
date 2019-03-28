@@ -11,17 +11,26 @@ class Author(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     last_logged_in = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.name + " : " + self.email
+
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
     author = models.ForeignKey(Author, on_delete=models.PROTECT)
 
+    def __str__(self):
+        return self.name
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
     author = models.ForeignKey(Author, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.name
 
 
 class Post(models.Model):
@@ -32,3 +41,6 @@ class Post(models.Model):
     author = models.ForeignKey(Author, on_delete=models.PROTECT)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     tags = models.ManyToManyField(Tag)
+
+    def __str__(self):
+        return self.title
